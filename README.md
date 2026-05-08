@@ -10,7 +10,6 @@
   - ☸️ `lab2-kubernetes/`: Prácticas esenciales divididas en dos enfoques:
     - **Stateless:** Despliegue de una app web dinámica inyectando configuración vía `ConfigMaps`.
     - **Stateful:** Implementación de una base de datos con `StatefulSets`, gestión de credenciales con `Secrets` y conexión mediante un frontend web (`Adminer`).
-- 📊 **`diagramas/`**: Archivos editables en draw.io para visualizar la arquitectura de nuestros clústeres.
 
 ## 🛠️ Requisitos Previos
 
