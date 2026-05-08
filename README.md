@@ -1,4 +1,4 @@
-# 🚀 Fundamentos Docker, Kubernetes y AKS
+# 🚀 Fundamentos Docker y Kubernetes
 
 ¡Bienvenido al repositorio oficial del curso! Aquí encontrarás todo el material necesario para la capacitación, diseñado para llevarte desde los conceptos básicos de la creación de contenedores hasta el despliegue de aplicaciones en cluster de kubernetes.
 
