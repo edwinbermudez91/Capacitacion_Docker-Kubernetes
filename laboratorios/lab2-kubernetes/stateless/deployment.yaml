@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-app # Nombre del Deployment
+spec:
+  replicas: 2 # Número de Pods que deseamos mantener ejecutándose
+  selector:
+    matchLabels:
+      app: color # Cómo identifica el Deployment a sus Pods
+  template:
+    metadata:
+      labels:
+        app: color # Etiqueta aplicada a cada Pod creado
+    spec:
+      containers:
+      - name: app
+        image: kodekloud/webapp-color   # Imagen que muestra una web con el color definido en APP_COLOR
+        ports:
+        - containerPort: 8080 # Puerto interno en el que escucha el contenedor
+        envFrom:
+        - configMapRef:
+            name: app-config # Importa todas las variables definidas en el ConfigMap
