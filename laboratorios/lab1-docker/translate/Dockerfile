@@ -5,9 +5,9 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-# Genera wheels precompilados para evitar herramientas de build en la imagen final
+# Genera wheels precompilados (incluyendo dependencias transitivas) para evitar herramientas de build en la imagen final
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r requirements.txt
+    && pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 
 # ---- Etapa 2: Imagen final ----
@@ -18,9 +18,9 @@ RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 
 WORKDIR /app
 
-# Instalar wheels sin herramientas de compilación
+# Instalar wheels directamente desde los binarios generados en la etapa builder
 COPY --from=builder /wheels /wheels
-RUN pip install --no-cache-dir /wheels/* && rm -rf /wheels
+RUN pip install --no-cache-dir --no-index --find-links=/wheels /wheels/* && rm -rf /wheels
 
 # Copiar solo los archivos necesarios
 COPY --chown=appuser:appgroup translate.py app.py index.html ./
