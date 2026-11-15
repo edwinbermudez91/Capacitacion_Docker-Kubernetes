@@ -181,11 +181,11 @@ Si el texto supera el límite, la API retorna `HTTP 422 Unprocessable Entity`.
 
 | Paquete | Versión | Uso |
 |---|---|---|
-| `fastapi` | 0.104.1 | Framework web API REST |
-| `uvicorn[standard]` | 0.24.0 | Servidor ASGI de producción |
-| `pydantic` | 2.5.0 | Validación de datos de entrada |
+| `fastapi` | 0.163.1 | Framework web API REST |
+| `uvicorn[standard]` | 0.54.0 | Servidor ASGI de producción |
+| `pydantic` | 2.14.3 | Validación de datos de entrada |
 | `deep-translator` | 1.11.4 | Cliente de Google Translate |
-| `python-multipart` | 0.0.6 | Soporte de formularios en FastAPI |
+| `python-multipart` | 0.0.33 | Soporte de formularios en FastAPI |
 
 ---
 

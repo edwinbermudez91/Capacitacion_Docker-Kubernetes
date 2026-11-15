@@ -1,5 +1,5 @@
 deep-translator==1.11.4
-fastapi==0.104.1
-pydantic==2.5.0
-uvicorn[standard]==0.24.0
-python-multipart==0.0.6
+fastapi==0.163.1
+pydantic==2.14.3
+uvicorn[standard]==0.54.0
+python-multipart==0.0.33
