@@ -13,6 +13,24 @@
 
 ---
 
+## 🧭 Mapa de Aprendizaje (De Cero a Producción)
+
+```mermaid
+flowchart LR
+    T["🎓 0. Teoría<br/>(PDF Oficial)"] --> L1A["🐳 1A. Docker Básico<br/>& Multi-Stage Builds"]
+    L1A --> L1B["🔐 1B. App Real<br/>Secure Translator (FastAPI)"]
+    L1B --> L2A["☸️ 2A. Kubernetes Stateless<br/>(Deployment + ConfigMap)"]
+    L2A --> L2B["🗄️ 2B. Kubernetes Stateful<br/>(StatefulSet + Secret + Adminer)"]
+
+    style T fill:#475569,color:#fff
+    style L1A fill:#0284c7,color:#fff
+    style L1B fill:#0f766e,color:#fff
+    style L2A fill:#2563eb,color:#fff
+    style L2B fill:#7c3aed,color:#fff
+```
+
+---
+
 ## 🗺️ Estructura del Repositorio
 
 ```text
@@ -34,13 +52,24 @@ Capacitacion_Docker-Kubernetes/
 
 ## 📚 Ruta de Aprendizaje y Laboratorios
 
-| Módulo | Laboratorio / Recurso | Qué aprenderás | Enlace Directo |
-| :---: | :--- | :--- | :---: |
-| **0️⃣ Teoría** | **Presentación Oficial (PDF)** | Conceptos clave de contenedores, arquitectura de Docker, arquitectura de Kubernetes y objetos principales. | [📄 Ver PDF](./presentaciones/Capacitacion-Docker_Kubernetes.pdf) |
-| **1️⃣ Docker Básico y Optimización** | **Lab 1A: Fundamentos y Multi-Stage** | Creación de `Dockerfile`, contenedores en background (`-d`), mapeo de puertos (`-p`) y reducción de tamaño con **Multi-stage builds**. | [🐳 Ir al Lab 1A](./laboratorios/lab1-docker/ejercicio-docker.md) |
-| **2️⃣ Docker en Producción** | **Lab 1B: Secure Translator (FastAPI)** | Empaquetado de una app web real con **Multi-stage build**, usuario **no-root (`appuser`)** y monitoreo automático con `HEALTHCHECK`. | [🔐 Ir al Lab 1B](./laboratorios/lab1-docker/translate/README.md) |
-| **3️⃣ Kubernetes Stateless** | **Lab 2A: App Web Sin Estado** | Despliegue de réplicas con `Deployment`, inyección de variables con `ConfigMap` y exposición mediante `Service (NodePort)`. | [☸️ Ir al Lab 2A](./laboratorios/lab2-kubernetes/ejercicio-stateless.md) |
-| **4️⃣ Kubernetes Stateful** | **Lab 2B: Base de Datos Con Estado** | Gestión de credenciales con `Secret`, despliegue de **MySQL** con `StatefulSet` + *Headless Service* y conexión visual desde **Adminer**. | [🗄️ Ir al Lab 2B](./laboratorios/lab2-kubernetes/ejercicio-stateful.md) |
+| Módulo | Laboratorio / Recurso | Nivel | Duración | Qué aprenderás | Enlace Directo |
+| :---: | :--- | :---: | :---: | :--- | :---: |
+| **0️⃣ Teoría** | **Presentación Oficial (PDF)** | `Básico` | `~30 min` | Conceptos clave de contenedores, arquitectura de Docker, arquitectura de Kubernetes y objetos principales. | [📄 Ver PDF](./presentaciones/Capacitacion-Docker_Kubernetes.pdf) |
+| **1️⃣ Docker Básico y Optimización** | **Lab 1A: Fundamentos y Multi-Stage** | `Básico` | `~20 min` | Creación de `Dockerfile`, contenedores en background (`-d`), mapeo de puertos (`-p`) y reducción de tamaño con **Multi-stage builds**. | [🐳 Ir al Lab 1A](./laboratorios/lab1-docker/ejercicio-docker.md) |
+| **2️⃣ Docker en Producción** | **Lab 1B: Secure Translator (FastAPI)** | `Intermedio` | `~20 min` | Empaquetado de una app web real con **Multi-stage build**, usuario **no-root (`appuser`)** y monitoreo automático con `HEALTHCHECK`. | [🔐 Ir al Lab 1B](./laboratorios/lab1-docker/translate/README.md) |
+| **3️⃣ Kubernetes Stateless** | **Lab 2A: App Web Sin Estado** | `Intermedio` | `~20 min` | Despliegue de réplicas con `Deployment`, inyección de variables con `ConfigMap` y exposición mediante `Service (NodePort)`. | [☸️ Ir al Lab 2A](./laboratorios/lab2-kubernetes/ejercicio-stateless.md) |
+| **4️⃣ Kubernetes Stateful** | **Lab 2B: Base de Datos Con Estado** | `Intermedio` | `~25 min` | Gestión de credenciales con `Secret`, despliegue de **MySQL** con `StatefulSet` + *Headless Service* y conexión visual desde **Adminer**. | [🗄️ Ir al Lab 2B](./laboratorios/lab2-kubernetes/ejercicio-stateful.md) |
+
+<details>
+<summary>✅ <strong>Checklist de Progreso de la Capacitación</strong></summary>
+
+- [ ] **Teoría:** Revisar la presentación `Capacitacion-Docker_Kubernetes.pdf`.
+- [ ] **Lab 1A:** Construir imágenes Docker, mapear puertos y comparar tamaños con Multi-stage builds.
+- [ ] **Lab 1B:** Levantar `secure-translator` con usuario no-root y verificar su `HEALTHCHECK`.
+- [ ] **Lab 2A:** Desplegar `color-app`, exponerlo vía `Service` y cambiar su color en caliente con `ConfigMap`.
+- [ ] **Lab 2B:** Desplegar `mysql-db` con `StatefulSet` + `Secret` y conectarse desde `Adminer` usando DNS interno.
+
+</details>
 
 ---
 

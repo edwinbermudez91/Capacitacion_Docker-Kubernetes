@@ -2,6 +2,20 @@
 
 Aplicación web que traduce texto de **Inglés → Español** usando FastAPI como backend y Google Translate (vía `deep-translator`) como motor de traducción. Diseñada para ejecutarse en un contenedor Docker.
 
+```mermaid
+flowchart LR
+    USER["🌐 Navegador / curl"] -->|"http://localhost:8000"| CONT
+    subgraph CONT["🐳 Contenedor (Usuario no-root: appuser)"]
+        API["⚡ FastAPI + Uvicorn (:8000)"] -->|"Traduce EN -> ES"| SVC["🔄 TranslationService"]
+        HC["💓 HEALTHCHECK (30s)"] -.->|"Verifica /"| API
+    end
+    SVC -->|"HTTPS"| GT["🌍 Google Translate API"]
+
+    style CONT fill:#f0fdf4,stroke:#16a34a,color:#14532d
+    style USER fill:#0284c7,color:#fff
+    style GT fill:#475569,color:#fff
+```
+
 ---
 
 ## Estructura del proyecto
@@ -180,3 +194,12 @@ Si el texto supera el límite, la API retorna `HTTP 422 Unprocessable Entity`.
 - El contenedor corre con un **usuario no-root** (`appuser`) para minimizar el riesgo de escalada de privilegios.
 - La interfaz web usa `innerText` para renderizar la traducción, previniendo ataques **XSS**.
 - El botón de traducción se deshabilita durante la petición para prevenir envíos duplicados.
+
+
+---
+
+<div align="center">
+
+[⬅️ Lab 1A: Docker Básico](../ejercicio-docker.md) · [🏠 Índice Principal](../../../README.md) · [Lab 2A: Kubernetes Stateless ➡️](../../lab2-kubernetes/ejercicio-stateless.md)
+
+</div>

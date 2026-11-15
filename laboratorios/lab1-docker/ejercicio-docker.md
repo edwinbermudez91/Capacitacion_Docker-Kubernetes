@@ -7,6 +7,16 @@ Puedes usar:
 - Play with Docker (play-with-docker.com)
 - Docker Desktop en tu máquina local
 
+```mermaid
+flowchart LR
+    DF["📄 Dockerfile<br/>(Instrucciones)"] -->|"docker build"| IMG["📦 Imagen<br/>(Solo lectura)"]
+    IMG -->|"docker run"| CONT["🐳 Contenedor<br/>(Instancia en ejecución)"]
+
+    style DF fill:#475569,color:#fff
+    style IMG fill:#0284c7,color:#fff
+    style CONT fill:#16a34a,color:#fff
+```
+
 ## Pasos
 ### 1. Verifica la instalación
 
@@ -71,6 +81,21 @@ docker rmi hello-world:latest --force
 
 En esta sección compararemos el tamaño de una imagen tradicional (~1 GB) frente a una imagen optimizada utilizando **Multi-stage builds** (~130 MB) con Python.
 
+```mermaid
+flowchart LR
+    subgraph Stage1["Etapa 1: builder (python:3.11)"]
+        REQ["requirements.txt"] -->|"pip wheel"| WHL["/app/wheels<br/>(Dependencias compiladas)"]
+    end
+
+    subgraph Stage2["Etapa 2: final (python:3.11-slim)"]
+        WHL -->|"COPY --from=builder"| INST["pip install --no-index"]
+        APP["app.py"] --> INST
+    end
+
+    style Stage1 fill:#fffbeb,stroke:#d97706,color:#78350f
+    style Stage2 fill:#f0fdf4,stroke:#16a34a,color:#14532d
+```
+
 Primero, crearemos los archivos de nuestra aplicación de prueba:
 
 ```bash
@@ -90,7 +115,7 @@ Crearemos un archivo llamado `Dockerfile.normal`:
 
 ```bash
 cat <<EOF > Dockerfile.normal
-FROM python:3.9
+FROM python:3.11
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -112,14 +137,14 @@ Ahora crearemos un `Dockerfile.multi` que utiliza una imagen inicial para compil
 ```bash
 cat <<EOF > Dockerfile.multi
 # Etapa 1: Constructor (Builder)
-FROM python:3.9 AS builder
+FROM python:3.11 AS builder
 WORKDIR /app
 COPY requirements.txt .
 # Generamos binarios precompilados (wheels) con todas sus dependencias
 RUN pip wheel --no-cache-dir --wheel-dir /app/wheels -r requirements.txt
 
 # Etapa 2: Imagen Final Ligera
-FROM python:3.9-slim
+FROM python:3.11-slim
 WORKDIR /app
 COPY --from=builder /app/wheels /wheels
 # Instalamos directamente desde los wheels generados en la etapa anterior
@@ -161,3 +186,11 @@ Una vez dominados los fundamentos, entra a la carpeta [`translate/`](./translate
 - Monitoreo nativo con instrucción **`HEALTHCHECK`**.
 
 👉 **[Sigue la guía paso a paso en `translate/README.md`](./translate/README.md)**
+
+---
+
+<div align="center">
+
+[🏠 Índice Principal](../../README.md) · [Lab 1B: Secure Translator ➡️](./translate/README.md)
+
+</div>

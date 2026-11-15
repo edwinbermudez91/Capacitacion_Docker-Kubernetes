@@ -7,6 +7,25 @@ En este ejercicio utilizaremos los manifiestos que se encuentran en la carpeta `
 - `stateful/statefulset-db.yaml`: Despliega un clúster MySQL con 2 réplicas ordenadas (`mysql-db-0` y `mysql-db-1`) y un servicio *Headless* (`mysql-headless`).
 - `stateful/frontend.yaml`: Despliega la aplicación `Adminer` para administrar la base de datos visualmente.
 
+```mermaid
+flowchart LR
+    USER["🌐 Usuario"] -->|"Port-Forward / NodePort"| FSVC["🔀 Service: frontend-svc"]
+    FSVC --> ADM["🖥️ Adminer Pod<br/>(Deployment: db-frontend)"]
+    ADM -->|"DNS: mysql-headless:3306"| HL["📡 Headless Service<br/>(mysql-headless)"]
+    HL --> P0["🗄️ mysql-db-0<br/>(Identidad estable)"]
+    HL --> P1["🗄️ mysql-db-1<br/>(Identidad estable)"]
+    SEC["🔐 Secret: db-credentials"] -.->|"Inyecta credenciales"| P0 & P1
+
+    style USER fill:#475569,color:#fff
+    style ADM fill:#0284c7,color:#fff
+    style HL fill:#7c3aed,color:#fff
+    style P0 fill:#16a34a,color:#fff
+    style P1 fill:#16a34a,color:#fff
+    style SEC fill:#dc2626,color:#fff
+```
+
+> **💡 Nota de Arquitectura:** Este laboratorio se enfoca en la **identidad de red estable** (`mysql-db-0.mysql-headless`, `mysql-db-1.mysql-headless`) sin requerir un *StorageClass* previo. En entornos de producción, además agregarías `volumeClaimTemplates` al `StatefulSet` para que cada réplica tenga su propio `PersistentVolumeClaim` dedicado.
+
 ## 1. Desplegar los recursos
 
 Desde la carpeta `laboratorios/lab2-kubernetes/`, aplica los manifiestos en tu clúster de Kubernetes ejecutando:
@@ -55,3 +74,12 @@ Una vez finalizado el laboratorio, elimina los recursos para liberar espacio en 
 ```bash
 kubectl delete -f stateful/
 ```
+
+
+---
+
+<div align="center">
+
+[⬅️ Lab 2A: Stateless](./ejercicio-stateless.md) · [🏠 Índice Principal](../../README.md)
+
+</div>

@@ -7,6 +7,20 @@ En este ejercicio utilizaremos los manifiestos que se encuentran en la carpeta `
 - `deployment.yaml`: Despliega múltiples réplicas (Pods) de la aplicación web asegurando que siempre estén disponibles. Lee los valores del ConfigMap.
 - `service.yaml`: Expone los Pods mediante un puerto accesible desde fuera del clúster (NodePort).
 
+```mermaid
+flowchart LR
+    USER["🌐 Usuario<br/>(:8080 o NodePort)"] -->|"Tráfico HTTP"| SVC["🔀 Service: color-svc<br/>(Port 80 → TargetPort 8080)"]
+    SVC -->|"Balancea (app: color)"| POD1["🐳 Pod: color-app-1"]
+    SVC -->|"Balancea (app: color)"| POD2["🐳 Pod: color-app-2"]
+    CM["⚙️ ConfigMap: app-config<br/>(APP_COLOR=blue)"] -.->|"Inyecta envFrom"| POD1 & POD2
+
+    style USER fill:#475569,color:#fff
+    style SVC fill:#0284c7,color:#fff
+    style POD1 fill:#16a34a,color:#fff
+    style POD2 fill:#16a34a,color:#fff
+    style CM fill:#d97706,color:#fff
+```
+
 ## 1. Desplegar los recursos
 
 Ubícate en la carpeta `laboratorios/lab2-kubernetes/` y aplica todos los manifiestos de la carpeta `stateless/` de forma simultánea:
@@ -56,3 +70,12 @@ Recarga tu navegador en `http://localhost:8080` y verás el nuevo color aplicado
 ```bash
 kubectl delete -f stateless/
 ```
+
+
+---
+
+<div align="center">
+
+[⬅️ Lab 1B: Secure Translator](../lab1-docker/translate/README.md) · [🏠 Índice Principal](../../README.md) · [Lab 2B: Stateful ➡️](./ejercicio-stateful.md)
+
+</div>
